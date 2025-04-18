@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detección de Rostros</title>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/face-api.js/1.3.0/face-api.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #video-container {
+            position: relative;
+            display: inline-block;
+        }
+        video, canvas {
+            width: 640px;
+            height: 480px;
+            border: 2px solid black;
+        }
+        .controls {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detección de Rostros</h1>
+    <div id="video-container">
+        <video id="video" autoplay muted></video>
+        <canvas id="canvas"></canvas>
+    </div>
+    <p id="status">Estado: No iniciado</p>
+    <div class="controls">
+        <button onclick="startVideo()">Iniciar Video</button>
+        <button onclick="detectFaces()">Detectar Caras</button>
+        <button onclick="stopVideo()">Detener</button>
+    </div>
+    
+    <script>
+        const video = document.getElementById("video");
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        let stream = null;
+
+        async function startVideo() {
+            stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+            video.srcObject = stream;
+            document.getElementById("status").innerText = "Estado: Video iniciado";
+        }
+
+        async function detectFaces() {
+//            const modelPath = "https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model/";
+            const modelPath = "models/"; 
+            await faceapi.nets.tinyFaceDetector.loadFromUri(modelPath);
+            
+            const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions());
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            detections.forEach(det => {
+                const { x, y, width, height } = det.box;
+                context.strokeStyle = "red";
+                context.lineWidth = 2;
+                context.strokeRect(x, y, width, height);
+            });
+
+            document.getElementById("status").innerText = `Caras detectadas: ${detections.length}`;
+        }
+
+        function stopVideo() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+                document.getElementById("status").innerText = "Estado: Video detenido";
+            }
+        }
+    </script>
+</body>
+</html>
