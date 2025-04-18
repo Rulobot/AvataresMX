@@ -275,20 +275,11 @@
 
       for (let letra of letras) {
         if (letrasPermitidas.includes(letra)) {
-          if letra == 'a':
-             imagen.src = "a.png";
-          if letra == 'b':
-             imagen.src = "b.png";
-          if letra == 'c':
-             imagen.src = "c.png";
-          if letra == 'd':
-             imagen.src = "d.png";
-          if letra == 'e':
-             imagen.src = "e.png";
-          //await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
+          imagen.src = `${letra}.png`;
+          await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
           imagen.src = "default.png";
-          //await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
+          await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
         }
 
       }
