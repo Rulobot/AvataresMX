@@ -272,12 +272,13 @@
       const imagen = document.getElementById("letra-avatar");
       const letras = texto.toLowerCase().split("");
       const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f', 'h','g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
-      i=0
+     
       for (let i = 0; i < texto.length; i++) {
         s = letras[i];
         if (letrasPermitidas.includes(s)) {
           console.log("Encontre S:", s);
-          imagen.src = s + ".png";
+          s2 = s + ".png"
+          imagen.src = s2;
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
           console.log("NoEncontre S:", s);
