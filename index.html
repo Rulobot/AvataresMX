@@ -273,8 +273,8 @@
       const letras = texto.toLowerCase().split("");
       const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f', 'h','g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
       i=0
-      for (let letra of letras) {
-        s = letras[i]
+      for (let i = 0; i < letras.length; i++) {
+        s = letras[i];
         if (letrasPermitidas.includes(s)) {
           console.log("Encontre S:", s);
         } else {
