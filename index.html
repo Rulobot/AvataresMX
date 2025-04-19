@@ -277,21 +277,24 @@
         s = letras[i];
         if (letrasPermitidas.includes(s)) {
           console.log("Encontre S:", s);
-        } else {
-          console.log("NoEncontre S:", s);
-        }
-        if (letrasPermitidas.includes(letra)) {
-          //s = '${letra}' + ".png";
-          //imagen.src = s;
-          imagen.src = "a.png"
-          console.log("Imagen Detectada:", {letra});
-          console.log("I:", letras[i]);
+          imagen.src = s + ".png"
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
+          console.log("NoEncontre S:", s);
           imagen.src = "h.png";
-          await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
+          await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras          
         }
-        i = i + 1
+        //if (letrasPermitidas.includes(letra)) {
+          //s = '${letra}' + ".png";
+          //imagen.src = s;
+          //imagen.src = "a.png"
+          //console.log("Imagen Detectada:", {letra});
+          //console.log("I:", letras[i]);
+          //await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
+        //} else {
+          //imagen.src = "h.png";
+          //await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
+        //}
       }
 
       // Imagen final por defecto
