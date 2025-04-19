@@ -277,7 +277,7 @@
         s = letras[i];
         if (letrasPermitidas.includes(s)) {
           console.log("Encontre S:", s);
-          imagen.src = s + ".png"
+          imagen.src = s + ".png";
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
           console.log("NoEncontre S:", s);
