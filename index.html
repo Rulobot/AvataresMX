@@ -273,27 +273,30 @@
       const imagen = document.getElementById("letra-avatar");
       const letras = texto.toLowerCase().split("");
       const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f', 'h','g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
-      i=0
       for (let letra of letras) {
         console.log("Letra de Letras Detectada:", letras[letra]);
-        if letras[letra] == 'a':
-           imagen.src = "a.png"
-        if letras[letra] == 'o':
-           imagen.src = "o.png"
+        if letras[letra] == 'a': {
+           imagen.src = "a.png"  }
+        else if letras[letra] == 'o': {
+           imagen.src = "o.png" }
 
-        if (letrasPermitidas.includes(letra)) {
-          s = letras[i] + ".png";
-          console.log("Imagen Detectada:", s);
+        await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
+        else: {
+           imagen.src = "default.png";
+           await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
+        }
+        //if (letrasPermitidas.includes(letra)) {
+        //  s = letras[i] + ".png";
+        //  console.log("Imagen Detectada:", s);
           //imagen.src = "a.png"
           //imagen.src = s;
           //console.log("Imagen Detectada:", {letra});
           //console.log("I:", letras[i]);
-          await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
-        } else {
-          imagen.src = "default.png";
-          await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
+          //await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
+        //} else {
+        //  imagen.src = "default.png";
+         // await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
         }
-        i = i+1
       }
 
       // Imagen final por defecto
