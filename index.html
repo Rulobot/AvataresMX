@@ -277,11 +277,12 @@
         console.log("Letra de Letras Detectada:", letras[letra]);
         if letras[letra] == 'a': {
            imagen.src = "a.png";  
+           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         }
         else if letras[letra] == 'o': {
            imagen.src = "o.png"; 
+           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         }
-        await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         else: {
            imagen.src = "default.png";
            await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
