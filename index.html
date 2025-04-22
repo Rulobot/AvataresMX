@@ -279,7 +279,8 @@
           if {letra} == 'a'{
              console.log("Letra Detectada en a:", {letra});
           }
-          imagen.src = `${letra}.png`;
+          //imagen.src = `${letra}.png`;
+          imagen.src = "a.png";
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
           imagen.src = "default.png";
