@@ -275,8 +275,8 @@
       const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f','h','g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
 
       for (let letra of letras) {
-        console.log("Letra Detectada:", letra);
         if (letrasPermitidas.includes(letra)) {
+          console.log("Letra Detectada:", {letra});
           imagen.src = `${letra}.png`;
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
