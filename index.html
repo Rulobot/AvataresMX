@@ -85,7 +85,7 @@
   <button class="green-button" onclick="escuchar()">🎤  Escuchar Pregunta</button>
 
   <div class="avatar-container">
-    <img id="letra-avatar" src="default.png" alt="Avatar hablando">
+    <img id="letra-avatar" src="img/default.png" alt="Avatar hablando">
   </div>
 
 
@@ -229,15 +229,19 @@
       }
     ];
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
     function escuchar() {
       const reconocimiento = new(window.SpeechRecognition || window.webkitSpeechRecognition)();
       reconocimiento.lang = 'es-MX';
       reconocimiento.start();
+
       reconocimiento.onresult = function(event) {
         const texto = event.results[0][0].transcript.toLowerCase();
         console.log("Texto detectado:", texto);
         responder(texto);
       };
+
       reconocimiento.onerror = function(event) {
         console.error("Error al escuchar:", event.error);
       };
@@ -252,6 +256,7 @@
           break;
         }
       }
+
       hablarConAvatar(respuesta);
     }
 
@@ -264,27 +269,25 @@
       mostrarLetras(texto);
     }
 
-     async function mostrarLetras(texto) {
+    async function mostrarLetras(texto) {
       const imagen = document.getElementById("letra-avatar");
       const letras = texto.toLowerCase().split("");
       const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f','h','g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
 
       for (let letra of letras) {
         if (letrasPermitidas.includes(letra)) {
-          imagen.src = `${letra}.png`;
+          imagen.src = `img/${letra}.png`;
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
-          imagen.src = "default.png";
+          imagen.src = "img/default.png";
           await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
         }
 
       }
 
       // Imagen final por defecto
-      imagen.src = "default.png";
+      imagen.src = "img/default.png";
     }
-
   </script>
 </body>
 </html>
-
