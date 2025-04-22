@@ -229,19 +229,15 @@
       }
     ];
 //-----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
     function escuchar() {
       const reconocimiento = new(window.SpeechRecognition || window.webkitSpeechRecognition)();
       reconocimiento.lang = 'es-MX';
       reconocimiento.start();
-
       reconocimiento.onresult = function(event) {
         const texto = event.results[0][0].transcript.toLowerCase();
         console.log("Texto detectado:", texto);
         responder(texto);
       };
-
       reconocimiento.onerror = function(event) {
         console.error("Error al escuchar:", event.error);
       };
@@ -256,7 +252,6 @@
           break;
         }
       }
-
       hablarConAvatar(respuesta);
     }
 
