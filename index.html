@@ -272,14 +272,19 @@
     async function mostrarLetras(texto) {
       const imagen = document.getElementById("letra-avatar");
       const letras = texto.toLowerCase().split("");
-      const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f','h','g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
+      const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f', 'h', 'g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
 
-      for (let letra of letras) {
-        if (letrasPermitidas.includes(letra)) {
-          imagen.src = "a.png";
+      for (let i = 0; i < texto.length; i++) {
+        console.log("Letra detectado:", texto[i]);
+        if (letrasPermitidas.includes(texto[i])) {
+          imagen.src = texto[i] + ".png";
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
-          imagen.src = "default.png";
+          if (texto[i] === " ") {
+             imagen.src = "h3.png";
+          } else {
+             imagen.src = "default.png";
+          }
           await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
         }
 
@@ -288,6 +293,9 @@
       // Imagen final por defecto
       imagen.src = "default.png";
     }
+
+
+    
   </script>
 </body>
 </html>
