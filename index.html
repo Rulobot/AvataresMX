@@ -279,16 +279,16 @@
         if (texto[i] === "a") {          
            imagen.src = "a.png";
            console.log("Habla una a");
-           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
+           //await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
          } 
         else if (texto[i] === 'o') {
            console.log("Habla una o");
            imagen.src = "o.png";
-           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
+           //await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
          } 
         else {
            imagen.src = "default.png";
-           await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
+           //await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
          }
       }
       // Imagen final por defecto
