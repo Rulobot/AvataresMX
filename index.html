@@ -278,8 +278,7 @@
         console.log("Letra detectado:", texto[i]);
         if (letrasPermitidas.includes(texto[i])) {
           console.log("Lettra detectado:", texto[i]);
-          s = cstr(texto[i]) + ".png"
-          imagen.src = s
+          imagen.src = texto[i] + ".png";
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
           imagen.src = "default.png";
