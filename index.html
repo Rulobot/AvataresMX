@@ -276,9 +276,9 @@
 
       for (let i = 0; i < texto.length; i++) {
         console.log("Letra detectado:", texto[i]);
-        if (texto[i] === "a") {
-           console.log("Habla una a");
+        if (texto[i] === "a") {          
            imagen.src = "a.png";
+           console.log("Habla una a");
            await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
          } 
         else if (texto[i] === 'o') {
