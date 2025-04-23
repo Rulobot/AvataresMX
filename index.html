@@ -276,17 +276,16 @@
 
       for (let i = 0; i < texto.length; i++) {
         console.log("Letra detectado:", texto[i]);
-        if (letrasPermitidas.includes(texto[i])) {
-           if (texto[i] === "o") {
-             imagen.src = "o.png";
-          } else {
-             imagen.src = texto[i] + ".png";
-          }
-          await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
-        } else {
-          imagen.src = "default.png";
-          await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
-        }
+        if (texto[i] === "a") or (texto[i] === "A") {
+           imagen.src = "a.png";
+           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
+         } else if (texto[i] === "o") or (texto[i] === "O") {
+           imagen.src = "o.png";
+           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
+         } else {
+           imagen.src = "default.png";
+           await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
+         }
       }
       // Imagen final por defecto
       imagen.src = "default.png";
