@@ -280,11 +280,7 @@
           imagen.src = texto[i] + ".png";
           await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
         } else {
-          if (texto[i] === " ") {
-             imagen.src = "h3.png";
-          } else {
-             imagen.src = "default.png";
-          }
+          imagen.src = "default.png";
           await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
         }
 
