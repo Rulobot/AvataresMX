@@ -38,6 +38,10 @@
       border: none;
       border-radius: 5px;
     }
+    .green-button.disabled {
+     background-color: gray;
+     cursor: wait;
+    }
     .avatar-container {
       width: 400px;
       height: 250px;
@@ -270,6 +274,8 @@
     }
 
     async function mostrarLetras(texto) {
+      const boton = document.getElementById("green-button");
+      boton.classList.add("disabled"); // Cambia a gris      
       const imagen = document.getElementById("letra-avatar");
       const letras = texto.toLowerCase().split("");
       const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f','h','g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
@@ -287,6 +293,7 @@
 
       // Imagen final por defecto
       imagen.src = "default.png";
+      boton.classList.remove("disabled"); // Vuelve a verde
     }
     
   </script>
