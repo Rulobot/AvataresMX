@@ -2,293 +2,179 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Asistente Forense</title>
+  <title>Control de Video por Voz</title>
   <style>
     body {
       background-color: black;
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 0;
-      padding: 0;
-      zoom: 200%; /* Solo funciona bien en algunos navegadores */
+      padding: 20px;
     }
-    header {
-      margin-top: 5px;
-    }
-    img#logo {
-      width: 150px;
-    }
-    h1 {
-      color: yellow;
-      font-weight: bold;
-      text-decoration: underline;
+    #escuchar {
+      background-color: #28a745;
+      color: white;
+      padding: 5px 130px;
       font-size: 14px;
-    }
-    button {
-      padding: 5px 20px;
-      margin: 10px;
-      font-size: 16px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
     }
-    .green-button {
-      background-color: green;
-      width: 260px; /* 👈 Fijas el ancho aquí */
-      height: 40px;
-      color: white;
-      border: none;
-      border-radius: 5px;
+    #videoContainer {
+      margin: 0 auto 5px;
+      background-color: black;
+      padding: 10px;
+      border-radius: 10px;
+      width: 640px;
+      margin-bottom: 1px;
+      margin-top: 1px;
+
     }
-    .avatar-container {
-      width: 400px;
-      height: 250px;
-      margin: 5px auto;
-    }
-    #letra-avatar {
+    video {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      max-width: 320px; /* antes: 640px */
+      border-radius: 10px;
     }
- 
-  .button-group {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 5px;
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .column button {
-    background-color: gray;
-    color: white;
-    width: 100px; /* 👈 Fijas el ancho aquí */
-    height: 70px; 
-    padding: 5px;
-    font-size: 14px;
-    border: none;
-    border-radius: 5px;
-
-  }
- 
- </style>
+    .button-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 1px;
+      margin-top: 5px;
+    }
+    .video-btn {
+      width: 100px;
+      height: 50px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <img src="logo2.png" id="logo" alt="Logo Institución">
-    <h1>Asistente Virtual</h1>
-  </header>
 
-  <button class="green-button" onclick="escuchar()">🎤  Escuchar Pregunta</button>
+  <button id="escuchar">Escuchar</button>
 
-  <div class="avatar-container">
-    <img id="letra-avatar" src="default.png" alt="Avatar hablando">
+  <div id="videoContainer">
+    <video id="miVideo" src="Vid4.mp4"></video>
   </div>
 
+  <!-- Fila 1 -->
+  <div class="button-grid">
+    <button class="video-btn" onclick="playSegment(0.0, 3.2)">Saludo</button>
+    <button class="video-btn" onclick="playSegment(4.2, 5.4)">Nombre</button>
+    <button class="video-btn" onclick="playSegment(5.6, 8.0)">Orígen</button>
+  </div>
 
-  <div class="button-group">
-     <div class="column">
-        <button onclick="responder('quienes son')">AIFCF</button>
-        <button onclick="responder('sitio web')">Contacto</button>
-        <button onclick="responder('oferta educativa')">Oferta Educativa</button>
-     </div>
-     <div class="column">
-        <button onclick="responder('información de la licenciatura en derecho')">Lic. Derecho</button>
-        <button onclick="responder('hola')">Lic. Psicología Criminológica</button>
-        <button onclick="responder('hola')">Lic. Criminalística y Criminología</button>
-     </div>
-     <div class="column">
-        <button onclick="responder('hola')">Maestría en Criminalística</button>
-        <button onclick="responder('hola')">Maestría en Criminología</button>
-        <button onclick="responder('hola')">Maestría en Juicio Oral</button>
-     </div>
+  <!-- Fila 2 -->
+  <div class="button-grid">
+    <button class="video-btn" onclick="playSegment(8.3, 16.0)">Oferta</button>
+    <button class="video-btn" onclick="playSegment(16.4, 25.0)">Oferta</button>
+    <button class="video-btn" onclick="playSegment(25.5, 29.5)">Oferta</button>
+  </div>
+
+  <!-- Fila 3 -->
+  <div class="button-grid">
+    <button class="video-btn" onclick="playSegment(29.6, 35.7)">Oferta</button>
+    <button class="video-btn" onclick="playSegment(29.6, 35.7)">Oferta</button>
+    <button class="video-btn" onclick="playSegment(37.8, 39.5)">Adiós</button>
   </div>
 
   <script>
-    const categorias = [
-       //--------------------------------- Saludos ------------------------------------------------------------------------
-      { nombre: "saludos",
-        inputs: ["hola", "holi", "qué tal", "cómo estás", "buen día", "buenos días", "buena tarde", "buenas tardes", "buena noche", "buenas noches"],
-        respuestas: ["hola, Encantado de poder ayudarte!", "hola, Feliz de verte!", "hola, ¿En qué puedo ayudarte?"]
-      },
-       //--------------------------------- Despedida -----------------------------------------------------------------------
-      { nombre: "despedida",
-        inputs: ["adiós", "bye", "hasta luego", "nos vemos", "me voy", "me despido", "me voy", "nos vamos"],
-        respuestas: ["hasta pronto.", "cuídate mucho.", "nos vemos después.", "Gracias por visitarnos."]
-      },
-       //-------------------------------- Groserías -------------------------------------------------------------------------
-      { nombre: "groserias",
-        inputs: ["chinga", "chingar", "chingao", "chingados", "chinguetas", "chingada", "pedo", "wey", "cabrón", "puto", "putito", "puta", "pinche", "mierda", "mames", "mamón"],
-        respuestas: ["con esa boquita comes?", "sin groserías por favor", "hay mejores formas de decirlo", "por favor la educación ante todo", "no pierdas el estilo"]
-      },
-      //-------------------------------- Agradecimiento ---------------------------------------------------------------------
-     {  nombre: "agrade",
-        inputs: ["muchas gracias", "mil gracias", "un millón de gracias", "gracias", "te agradezco", "agradecido"],
-        respuestas: ["de nada, un placer", "gracias a tí", "nada qué agradecer", "de nada, con gusto", "de nada, lo que necesites"]
-      },
-      //------------------------------- Personales --------------------------------------------------------------------------
-      { nombre: "edad",
-        inputs: ["edad tienes", "cuántos años tienes", "edad", "tu edad", "años cumplidos"],
-        respuestas: ["aún soy muy jóven", "los suficientes para correr por internet", "ni muy jóven, ni muy viejo", "eso no se dice"]
-      },
-      { nombre: "nombre",
-        inputs: ["cuál es tu nombre", "cómo te llamas", "cómo te llaman", "cómo te haces llamar", "tienes un nombre"],
-        respuestas: ["mi nombre es rulobot", "me llaman rulobot", "soy rulobot", "dime rulobot por favor", "rulobot a secas"]
-      },
-      { nombre: "nombre2",
-        inputs: ["te llamas rulo bot", "tu nombre es rulo bot", "eres rulo bot", "rulo bot"],
-        respuestas: ["así es", "correcto, para servirte", "si, a tus órdenes", "para servirte", "a tus órdenes"]
-      },
-      //------------------------------ Academia ------------------------------------------------------------------------------
-      { nombre: "nomb",
-        inputs: ["significa aifcf", "qué es aifcf", "nombre de la escuela", "nombre de la institución", "nombre de la academia", "significado de aifcf", "llama la escuela"],
-        respuestas: ["somos la Academia Internacional de Formación en Ciencias Forenses"]
-      },
-      { nombre: "sweb",
-        inputs: ["sitio web", "página oficial", "datos de contacto", "cómo los encuentro en internet", "redes sociales", "teléfono", "teléfonos", "whatsap", "página web"],
-        respuestas: ["nos encuentras en www.a i f c f.edu.mx o en los telefonos 55 8596 4527 o en 55 8596 4528"]
-      },
-      { nombre: "direccion",
-        inputs: ["dónde están ubicados", "cuál es su ubicación", "en dónde se encuentran", "cómo los encuentro en la ciudad", "en dónde están ubicados", "dónde los localizo"],
-        respuestas: ["te esperamos en doctor liceaga numero 103, colonia doctores, delegación Cuauhtémoc en la ciudad de méxico"]
-      },
-     { nombre: "validez",
-        inputs: ["tienen validez oficial", "programas con validez oficial", "están validados oficialmente"],
-        respuestas: ["todos nuestros programas cuentan con validez oficial ante la Secretaría de Educación Pública SEP"]
-      },
-      { nombre: "duracion",
-        inputs: ["qué duración tiene", "cuánto dura", "cuánto duran"],
-        respuestas: ["Las licenciaturas duran 9 cuatrimestres"]
-      },
+    const video = document.getElementById('miVideo');
+    let playingSegment = false;
+    let segmentEnd = 0;
 
-      { nombre: "academ",
-        inputs: ["quienes son", "como se llaman", "información de la academia", "información de la escuela", "informes de la academia", "informes de la escuela"],
-        respuestas: [
-          "somos una academia con personal altamente calificado para la impartición de conocimientos en diversas áreas forenses, siendo destacados expertos prácticos y teóricos",
-          "tenemos un convenio con la Sociedad Boliviana de Ciencias Forenses, el cual nos otorga la ventaja de estar reconocidos por dos países precursores en las Ciencias Forenses como lo es México y Bolivia",
-          "contamos con la participación de expositores a nivel internacional que a la fecha han realizado diversos trabajos de investigación",
-          "somos una Institución dedicada a promover el estudio e interés por las Ciencias Forenses",
-          "somos una institución cuya base educativa recae en el personal docente que domina teórica y prácticamente todos los temas",
-          "somos una institución con más de 21 años como empresa consolidada en este país"
-        ]
+    // Diccionario de frases agrupadas
+    const comandos = [
+      { frases: ["hola", "que tal", "holi", "hola como estas"],
+        inicio: 0.0,
+        fin: 3.2
       },
-      { nombre: "reqadmin_lic",
-        inputs: ["requisitos de admisión", "requerimientos para inscribirse"],
-        respuestas: [
-          "Para la licenciatura el certificado de bachillerato, examen de admisión, una entrevista y pruebas psicométricas. Para la maestría, se requiere título de licenciatura afín, examen de conocimientos, experiencia profesional y una entrevista"
-        ]
+      { frases: ["cómo te llamas", "cuál es tu nombre"],
+        inicio: 4.2,
+        fin: 5.4
       },
-
-      { nombre: "costos_lic",
-        inputs: ["cuánto cuesta", "costos", "qué cuesta", "cuales son los costos", "costo"],
-        respuestas: [
-          "Los costos son: inscripción de 2000 pesos, Reinscripción al segundo cuatrimestre de 2000 pesos, Mensualidad de 2500 pesos y la Titulación tiene costo de 15000 pesos",
-          "la inscripción de 2000 pesos, Reinscripción al segundo cuatrimestre de 2000 pesos, Mensualidad de 2500 pesos y la Titulación tiene costo de 15000 pesos"
-        ]
+      { frases: ["de dónde eres", "dónde naciste"],
+        inicio: 5.6,
+        fin: 8.0
       },
-      { nombre: "ofer_academ",
-        inputs: ["oferta educativa", "oferta académica", "qué ofrecen", "cursos disponibles", "qué puedo estudiar", "vengo por información", "qué ofreces", "qué programas ofrecen", "qué programas tienen"],
-        respuestas: [
-          "Ofrecemos diplomados, licenciaturas y maestrías todo enfocado a las ciencias forenses",
-          "Tenemos diplomados, licenciaturas y maestrías, necesitas información de algo en específico?",
-          "Te podemos ofrecer diplomados, licenciaturas y maestrías, algo en particular? "
-        ]
+      { frases: ["qué haces", "qué vendes", "qué informas", "qué más haces", "qué otra cosa haces", "qué más vendes", "qué más vendes", "qué ofreces"],
+        inicio: 8.3,
+        fin: 16.0
       },
-      { nombre: "preguntas_diplomados",
-        inputs: ["qué diplomados tienen", "ofrecen diplomados", "diplomados disponibles", "diplomados ofrecen", "diplomados disponibles", "información de diplomados"],
-        respuestas: [
-          "Por el momento no hay disponibilidad pero te ofrecemos opciones en licenciaturas y maestrías"
-        ]
+      { frases: ["gracias", "te agradezco", "agradecido"],
+        inicio: 35.9,
+        fin: 37.7
       },
-
-     { nombre: "lic_der",
-        inputs: ["información de la licenciatura en derecho", "informes de la licenciatura en derecho"],
-        respuestas: [
-          "la licenciatura en derecho es una excelente opción para el estudio de la justicia y la seguridad jurídica"
-        ]
-      },
- 
-     { nombre: "preguntas_licenciaturas",
-        inputs: ["qué licenciaturas tienen", "ofrecen licenciaturas", "licenciaturas disponibles", "licenciaturas ofrecen", "licenciaturas disponibles", "información de licenciaturas"],
-        respuestas: [
-          "ofrecemos licenciaturas en derecho, criminología y criminalística así como en Psicología Criminológica",
-          "contamos con licenciaturas en derecho, criminología y criminalística así como en Psicología Criminológica",
-          "puedes estudiar licenciaturas en derecho, criminología y criminalística así como en Psicología Criminológica"
-        ]
-      },
-      { nombre: "preguntas_maestrías",
-        inputs: ["qué maestrías tienen", "ofrecen maestrías", "maestrías disponibles", "maestrías ofrecen", "maestrías disponibles", "información de maestrías"],
-        respuestas: [
-          "contamos con maestrías en criminalística, criminología y juicio oral",
-          "ofrecemos maestrías en criminalística, criminología y juicio oral",
-          "tenemos maestrías en criminalística, criminología y juicio oral"
-        ]
+      { frases: ["adiós", "hasta luego", "nos vemos", "luego la vez", "chao", "arrivederchi"],
+        inicio: 37.8,
+        fin: 39.5
       }
     ];
-//-----------------------------------------------------------------------------------------------------------------------------------------------------
 
+    video.addEventListener('loadedmetadata', () => {
+      video.currentTime = 0;
+    });
 
-    function escuchar() {
-      const reconocimiento = new(window.SpeechRecognition || window.webkitSpeechRecognition)();
-      reconocimiento.lang = 'es-MX';
+    video.addEventListener('canplay', () => {
+      video.play();
+    });
+
+    video.addEventListener('timeupdate', () => {
+      if (!playingSegment && video.currentTime > 0.5) {
+        video.pause();
+      }
+      if (playingSegment && video.currentTime >= segmentEnd) {
+        video.pause();
+        playingSegment = false;
+      }
+    });
+
+    function playSegment(start, end) {
+      playingSegment = true;
+      segmentEnd = end;
+      video.currentTime = start;
+      video.play();
+    }
+
+    // Reconocimiento de voz
+    document.getElementById("escuchar").addEventListener("click", () => {
+      const reconocimiento = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      reconocimiento.lang = "es-MX";
+      reconocimiento.interimResults = false;
+      reconocimiento.maxAlternatives = 1;
+
       reconocimiento.start();
 
-      reconocimiento.onresult = function(event) {
-        const texto = event.results[0][0].transcript.toLowerCase();
-        console.log("Texto detectado:", texto);
-        responder(texto);
+      reconocimiento.onresult = (event) => {
+        const texto = event.results[0][0].transcript.toLowerCase().trim();
+        console.log("Texto reconocido:", texto);
+
+        let encontrado = false;
+
+        for (let comando of comandos) {
+          if (comando.frases.includes(texto)) {
+            playSegment(comando.inicio, comando.fin);
+            encontrado = true;
+            break;
+          }
+        }
+
+        if (!encontrado) {
+          alert("No se reconoció la frase: " + texto);
+        }
       };
 
-      reconocimiento.onerror = function(event) {
-        console.error("Error al escuchar:", event.error);
+      reconocimiento.onerror = (event) => {
+        alert("Error al reconocer la voz: " + event.error);
       };
-    }
-
-    function responder(preguntaUsuario) {
-      let respuesta = "Lo siento, no entendí la pregunta.";
-
-      for (let categoria of categorias) {
-        if (categoria.inputs.some(input => preguntaUsuario.includes(input))) {
-          respuesta = categoria.respuestas[Math.floor(Math.random() * categoria.respuestas.length)];
-          break;
-        }
-      }
-
-      hablarConAvatar(respuesta);
-    }
-
-    function hablarConAvatar(texto) {
-      const voz = new SpeechSynthesisUtterance(texto);
-      voz.lang = 'es-MX';
-      speechSynthesis.speak(voz);
-
-      // Mostrar imágenes letra por letra
-      mostrarLetras(texto);
-    }
-
-    async function mostrarLetras(texto) {
-      const imagen = document.getElementById("letra-avatar");
-      const letras = texto.toLowerCase().split("");
-      const letrasPermitidas = ['a', 'e', 'i', 'o', 'u', 'b', 'c', 'd', 'f','h','g', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'v', 'x', 'w', 'y', 'z'];
-
-      for (let letra of letras) {
-        if (letrasPermitidas.includes(letra)) {
-          console.log("Letra a");
-          imagen.src = "a.png";
-          await new Promise(resolve => setTimeout(resolve, 40)); // espera 200 ms entre letras
-        } else {
-          imagen.src = "default.png";
-          await new Promise(resolve => setTimeout(resolve, 70)); // espera 200 ms entre letras
-        }
-      }
-
-      // Imagen final por defecto
-      imagen.src = "default.png";
-    }
-    
+    });
   </script>
+
 </body>
 </html>
