@@ -11,28 +11,42 @@
       margin: 0;
       padding: 20px;
     }
+    /* Botón escuchar */
     #escuchar {
       background-color: #28a745;
       color: white;
-      padding: 5px 345px;
-      font-size: 32px;
+      padding: 5px 130px;
+      font-size: 14px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+    }
+    /* Botón datos */
+    #datos {
+      background-color: green;
+      color: white;
+      padding: 10px 40px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      gap: 20px;              /* espacio entre botones */
+
     }
     #videoContainer {
       margin: 0 auto 5px;
       background-color: black;
       padding: 10px;
       border-radius: 10px;
-      width: 840px;
+      width: 640px;
       margin-bottom: 1px;
       margin-top: 1px;
-
     }
     video {
       width: 100%;
-      max-width: 840px; /* antes: 640px */
+      max-width: 320px; /* antes: 640px */
       border-radius: 10px;
     }
     .button-grid {
@@ -44,45 +58,91 @@
       margin-top: 5px;
     }
     .video-btn {
-      width: 300px;
+      width: 100px;
       height: 50px;
-      font-size: 32px;
+      font-size: 16px;
       border: none;
       background-color: #007bff;
       color: white;
       border-radius: 6px;
       cursor: pointer;
     }
+    /* Botón info */
+    #info {
+      background-color: #f44336;
+      color: white;
+      padding: 10px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      gap: 20px;              /* espacio entre botones */
+    }
+    /* Estilo del iframe oculto */
+    #formulario {
+      display: none;
+      width: 100%;
+      height: 80vh;
+      border: none;
+      margin-top: 20px;
+    }
+
+    /* Botón regresar */
+    #btn-regresar {
+      display: none;
+      background-color: red;
+      color: white;
+      width: 250px;
+      padding: 10px 250px;
+    }
+
   </style>
 </head>
 <body>
+  <!-- Contenedor principal -->
+  <div id="pantalla-principal">
+  
+     <button id="escuchar">Escuchar</button>
 
-  <button id="escuchar">Escuchar</button>
+     <div id="videoContainer">
+       <video id="miVideo" src="Vid4.mp4"></video>
+     </div>
 
-  <div id="videoContainer">
-    <video id="miVideo" src="Vid4.mp4"></video>
+     <!-- Fila 1 -->
+     <div class="button-grid">
+       <button class="video-btn" onclick="playSegment(0.0, 3.2)">Saludo</button>
+       <button class="video-btn" onclick="playSegment(4.2, 5.4)">Nombre</button>
+       <button class="video-btn" onclick="playSegment(5.6, 8.0)">Orígen</button>
+     </div>
+
+     <!-- Fila 2 -->
+     <div class="button-grid">
+       <button class="video-btn" onclick="playSegment(8.3, 16.0)">Oferta</button>
+       <button class="video-btn" onclick="playSegment(16.4, 25.0)">Oferta</button>
+       <button class="video-btn" onclick="playSegment(25.5, 28.0)">Oferta</button>
+     </div>
+
+     <!-- Fila 3 -->
+     <div class="button-grid">
+       <button class="video-btn" onclick="playSegment(28.5, 32.0)">Oferta</button>
+       <button class="video-btn" onclick="playSegment(32.5, 38.0)">Oferta</button>
+       <button class="video-btn" onclick="playSegment(54.9, 57.7)">Adiós</button>
+     </div>
+
+     <button id="datos" onclick="mostrarFormulario()">Dame tus datos</button>
+
+     <!-- Botón descargar -->
+     <a href="RbotInfo.pdf" download="RbotInfo.pdf" id="info">Contacto</a>
+  
   </div>
 
-  <!-- Fila 1 -->
-  <div class="button-grid">
-    <button class="video-btn" onclick="playSegment(0.0, 3.2)">Saludo</button>
-    <button class="video-btn" onclick="playSegment(4.2, 5.4)">Nombre</button>
-    <button class="video-btn" onclick="playSegment(5.6, 8.0)">Orígen</button>
-  </div>
-
-  <!-- Fila 2 -->
-  <div class="button-grid">
-    <button class="video-btn" onclick="playSegment(8.3, 16.0)">Oferta</button>
-    <button class="video-btn" onclick="playSegment(16.4, 25.0)">Oferta</button>
-    <button class="video-btn" onclick="playSegment(25.5, 29.5)">Oferta</button>
-  </div>
-
-  <!-- Fila 3 -->
-  <div class="button-grid">
-    <button class="video-btn" onclick="playSegment(29.6, 35.7)">Oferta</button>
-    <button class="video-btn" onclick="playSegment(29.6, 35.7)">Oferta</button>
-    <button class="video-btn" onclick="playSegment(37.8, 39.5)">Adiós</button>
-  </div>
+     <!-- Iframe con formulario -->
+     <iframe id="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLSdjj3B9rsIiZoD3nV6zusYVbA9kjrhxU7JllbORvKNt0PDTUQ/viewform"></iframe>
+     <!-- Botón regresar -->
+     <button id="btn-regresar" onclick="regresar()">Regresar</button>
+ 
 
   <script>
     const video = document.getElementById('miVideo');
@@ -108,12 +168,12 @@
         fin: 16.0
       },
       { frases: ["gracias", "te agradezco", "agradecido"],
-        inicio: 35.9,
-        fin: 37.7
+        inicio: 46.0,
+        fin: 47.7
       },
       { frases: ["adiós", "hasta luego", "nos vemos", "luego la vez", "chao", "arrivederchi"],
-        inicio: 37.8,
-        fin: 39.5
+        inicio: 54.9,
+        fin: 57.7
       }
     ];
 
@@ -140,6 +200,18 @@
       segmentEnd = end;
       video.currentTime = start;
       video.play();
+    }
+
+    function mostrarFormulario() {
+      document.getElementById("pantalla-principal").style.display = "none";
+      document.getElementById("formulario").style.display = "block";
+      document.getElementById("btn-regresar").style.display = "block";
+    }
+
+    function regresar() {
+      document.getElementById("formulario").style.display = "none";
+      document.getElementById("btn-regresar").style.display = "none";
+      document.getElementById("pantalla-principal").style.display = "block";
     }
 
     // Reconocimiento de voz
@@ -174,6 +246,7 @@
         alert("Error al reconocer la voz: " + event.error);
       };
     });
+
   </script>
 
 </body>
