@@ -1,28 +1,35 @@
+/*------------------------------------------------------------------------------------------------------------------*/
 <!DOCTYPE html>
 <html lang="es">
+/*------------------------------------------------------------------------------------------------------------------*/
 <head>
   <meta charset="UTF-8">
-  <title>Control de Video por Voz</title>
+  <title>Rulobot te ayuda</title>                                                       /* Titulo de la Pagnina Web */
+  /*----------------------------------------------------------------------------------------------------------------*/
   <style>
+    /*------------------------- Propiedades del Formulario ---------------------------------------------------------*/ 
     body {
-      zoom: 230%; /* Cambia el porcentaje según lo que necesites */
-      background-color: black;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
+      margin: 0;                                                                            /* Empieza desde arriba */
+      padding: 0;                                                                           /* Empieza desde arriba */
+      background-color: black;                                                          /* Fondo de la pagina Negro */
+      text-align: center;                                                    /* Centra horizontalmente el contenido */
+      font-family: Arial, sans-serif;                                                      /* Asigna tipo de Fuente */                
+      zoom: 230%;                                                                         /* Zoom de la página Web  */
+      justify-content: center;                                                            /* centra horizontalmente */
     }
-    /* Botón escuchar */
+    /*------------------------ Propiedades del Botón Escuchar ------------------------------------------------------*/ 
     #escuchar {
-      background-color: #28a745;
-      color: white;
-      padding: 5px 130px;
-      font-size: 14px;
-      border: none;
-      border-radius: 8px;
+      background-color: #28a745;                                           /* Asigan Color Verde del botón Escuchar */
+      color: white;                                                  /* Asigna Color Blanco para el texto del Botón */
+      padding: 5px 130px;                              /* Asigna El alto a 5 Pixeles y un ancho fijo de 130 Pixeles */
+      font-size: 14px;                                                                 /* Asigna el tamaño del Font */
+      border: none;                                                                               /* Quita el Borde */
+      border-radius: 8px;                                                                 /* Asigna Radio del Borde */
       cursor: pointer;
+      margin-left: 55px;                                                   /* mueve el botón 150px hacia la derecha */  
+      margin-top: -105px;                                              /* Mueve el botón hacia arriba o hacia abajo */  
     }
-    /* Botón datos */
+    /*----------------------------- Propiedades del de Datos -------------------------------------------------------*/ 
     #datos {
       background-color: green;
       color: white;
@@ -33,17 +40,16 @@
       cursor: pointer;
       margin-bottom: 20px;
       margin-top: 20px;
-      gap: 20px;              /* espacio entre botones */
-
+      gap: 20px;                                                                           /* espacio entre botones */
+      margin-left: 55px;                                                   /* mueve el botón 150px hacia la derecha */ 
     }
     #videoContainer {
-      margin: 0 auto 5px;
+      margin: 0 auto 10px;
       background-color: black;
-      padding: 10px;
       border-radius: 10px;
       width: 640px;
       margin-bottom: 1px;
-      margin-top: 1px;
+      margin-top: -70px;                                              /* Mueve el botón hacia arriba o hacia abajo */  
     }
     video {
       width: 100%;
@@ -57,6 +63,7 @@
       gap: 10px;
       margin-bottom: 1px;
       margin-top: 5px;
+      margin-left: 55px; /* mueve el botón 150px hacia la derecha */
     }
     .video-btn {
       width: 100px;
@@ -98,9 +105,10 @@
       width: 250px;
       padding: 10px 250px;
     }
-
   </style>
+  /*----------------------------------------------------------------------------------------------------------------*/
 </head>
+/*------------------------------------------------------------------------------------------------------------------*/
 <body>
   <!-- Contenedor principal -->
   <div id="pantalla-principal">
@@ -108,7 +116,7 @@
      <button id="escuchar">Escuchar</button>
 
      <div id="videoContainer">
-       <video id="miVideo" src="Vid4.mp4"></video>
+       <video id="miVideo" src="Vid3.mp4"></video>
      </div>
 
      <!-- Fila 1 -->
@@ -135,7 +143,7 @@
      <button id="datos" onclick="mostrarFormulario()">Dame tus datos</button>
 
      <!-- Botón descargar -->
-     <a href="RbotInfo.pdf" download="RbotInfo.pdf" id="info">Contacto</a>
+     <a href="1.pdf" download="1.pdf" id="info">Contacto</a>
   
   </div>
 
