@@ -1,71 +1,63 @@
-/*------------------------------------------------------------------------------------------------------------------*/
 <!DOCTYPE html>
 <html lang="es">
-/*------------------------------------------------------------------------------------------------------------------*/
 <head>
   <meta charset="UTF-8">
-  <title>Rulobot te ayuda</title>                                                       /* Titulo de la Pagnina Web */
-  /*----------------------------------------------------------------------------------------------------------------*/
+  <title>Rulobot te ayuda</title>
   <style>
-    /*------------------------- Propiedades del Formulario ---------------------------------------------------------*/ 
     body {
-      margin: 0;                                                                            /* Empieza desde arriba */
-      padding: 0;                                                                           /* Empieza desde arriba */
-      background-color: black;                                                          /* Fondo de la pagina Negro */
-      text-align: center;                                                    /* Centra horizontalmente el contenido */
-      font-family: Arial, sans-serif;                                                      /* Asigna tipo de Fuente */                
-      zoom: 230%;                                                                         /* Zoom de la página Web  */
-      justify-content: center;                                                            /* centra horizontalmente */
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      font-family: Arial, sans-serif;
+
+      /* Centrar horizontalmente pero pegado arriba */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;  /* 👈 ahora queda arriba */
+      height: 100vh;
+      overflow: auto;           /* 👈 permite scroll si se pasa del alto */
     }
-    /*------------------------ Propiedades del Botón Escuchar ------------------------------------------------------*/ 
+
+    /* Contenedor principal */
+    #pantalla-principal {
+      transform-origin: top center;
+      text-align: center;
+    }
+
+    /* Botón Escuchar */
     #escuchar {
-      background-color: #28a745;                                           /* Asigan Color Verde del botón Escuchar */
-      color: white;                                                  /* Asigna Color Blanco para el texto del Botón */
-      padding: 5px 130px;                              /* Asigna El alto a 5 Pixeles y un ancho fijo de 130 Pixeles */
-      font-size: 14px;                                                                 /* Asigna el tamaño del Font */
-      border: none;                                                                               /* Quita el Borde */
-      border-radius: 8px;                                                                 /* Asigna Radio del Borde */
-      cursor: pointer;
-      margin-left: 55px;                                                   /* mueve el botón 150px hacia la derecha */  
-      margin-top: -105px;                                              /* Mueve el botón hacia arriba o hacia abajo */  
-    }
-    /*----------------------------- Propiedades del de Datos -------------------------------------------------------*/ 
-    #datos {
-      background-color: green;
+      background-color: #28a745;
       color: white;
-      padding: 10px 40px;
+      padding: 10px 180px;
       font-size: 16px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin-bottom: 20px;
-      margin-top: 20px;
-      gap: 20px;                                                                           /* espacio entre botones */
-      margin-left: 55px;                                                   /* mueve el botón 150px hacia la derecha */ 
+      margin: 20px 0;
     }
+
+    /* Video */
     #videoContainer {
-      margin: 0 auto 10px;
+      margin: 20px auto;
       background-color: black;
       border-radius: 10px;
       width: 640px;
-      margin-bottom: 1px;
-      margin-top: -70px;                                              /* Mueve el botón hacia arriba o hacia abajo */  
     }
+
     video {
       width: 100%;
-      max-width: 320px; /* antes: 640px */
       border-radius: 10px;
     }
+
+    /* Grilla de botones */
     .button-grid {
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 1px;
-      margin-top: 5px;
-      margin-left: 55px; /* mueve el botón 150px hacia la derecha */
+      gap: 15px;
+      margin: 10px 0;
     }
-    .video-btn {
+
+    .button-grid button {
       width: 100px;
       height: 50px;
       font-size: 16px;
@@ -75,7 +67,20 @@
       border-radius: 6px;
       cursor: pointer;
     }
-    /* Botón info */
+
+    /* Botón datos */
+    #datos {
+      background-color: green;
+      color: white;
+      padding: 10px 40px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 20px 0;
+    }
+
+    /* Botón contacto */
     #info {
       background-color: #f44336;
       color: white;
@@ -84,17 +89,17 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin-bottom: 20px;
-      margin-top: 20px;
-      gap: 20px;              /* espacio entre botones */
+      margin: 20px 0;
+      display: inline-block;
     }
-    /* Estilo del iframe oculto */
+   /* Estilo del iframe oculto */
     #formulario {
       display: none;
       width: 100%;
       height: 80vh;
       border: none;
       margin-top: 20px;
+      align-items: flex-start;
     }
 
     /* Botón regresar */
@@ -102,56 +107,50 @@
       display: none;
       background-color: red;
       color: white;
-      width: 250px;
-      padding: 10px 250px;
+      /*width: 80px; */
+      padding: 10px 80px;
     }
   </style>
-  /*----------------------------------------------------------------------------------------------------------------*/
 </head>
-/*------------------------------------------------------------------------------------------------------------------*/
 <body>
-  <!-- Contenedor principal -->
   <div id="pantalla-principal">
-  
-     <button id="escuchar">Escuchar</button>
+    <button id="escuchar">Escuchar</button>
 
-     <div id="videoContainer">
-       <video id="miVideo" src="Vid4.mp4"></video>
-     </div>
+    <div id="videoContainer">
+      <video id="miVideo" src="Vid3.mp4"></video>
+    </div>
 
-     <!-- Fila 1 -->
-     <div class="button-grid">
-       <button class="video-btn" onclick="playSegment(0.0, 3.2)">Saludo</button>
-       <button class="video-btn" onclick="playSegment(4.2, 5.4)">Nombre</button>
-       <button class="video-btn" onclick="playSegment(5.6, 8.0)">Orígen</button>
-     </div>
+    <div class="button-grid">
+      <button class="video-btn" onclick="playSegment(0.0, 3.2)">Saludo</button>
+      <button class="video-btn" onclick="playSegment(4.2, 5.4)">Nombre</button>
+      <button class="video-btn" onclick="playSegment(5.6, 8.0)">Orígen</button>
+    </div>
 
-     <!-- Fila 2 -->
-     <div class="button-grid">
-       <button class="video-btn" onclick="playSegment(8.3, 16.0)">Oferta</button>
-       <button class="video-btn" onclick="playSegment(16.4, 25.0)">Oferta</button>
-       <button class="video-btn" onclick="playSegment(25.5, 28.0)">Oferta</button>
-     </div>
+    <!-- Fila 2 -->
+    <div class="button-grid">
+      <button class="video-btn" onclick="playSegment(8.3, 16.0)">Oferta</button>
+      <button class="video-btn" onclick="playSegment(16.4, 25.0)">Oferta</button>
+      <button class="video-btn" onclick="playSegment(25.5, 28.0)">Oferta</button>
+    </div>
 
-     <!-- Fila 3 -->
-     <div class="button-grid">
-       <button class="video-btn" onclick="playSegment(28.5, 32.0)">Oferta</button>
-       <button class="video-btn" onclick="playSegment(32.5, 38.0)">Oferta</button>
-       <button class="video-btn" onclick="playSegment(54.9, 57.7)">Adiós</button>
-     </div>
+    <!-- Fila 3 -->
+    <div class="button-grid">
+      <button class="video-btn" onclick="playSegment(28.5, 32.0)">Oferta</button>
+      <button class="video-btn" onclick="playSegment(32.5, 38.0)">Oferta</button>
+      <button class="video-btn" onclick="playSegment(54.9, 57.7)">Adiós</button>
+    </div>
 
-     <button id="datos" onclick="mostrarFormulario()">Dame tus datos</button>
+    <button id="datos" onclick="mostrarFormulario()">Dame tus datos</button>
 
-     <!-- Botón descargar -->
-     <a href="RbotInfo.pdf" download="RbotInfo.pdf" id="info">Contacto</a>
-  
+    <!-- Botón descargar -->
+    <a href="RbotInfo.pdf" download="RbotInfo.pdf" id="info">Contacto</a>
+
   </div>
 
-     <!-- Iframe con formulario -->
-     <iframe id="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLSdjj3B9rsIiZoD3nV6zusYVbA9kjrhxU7JllbORvKNt0PDTUQ/viewform"></iframe>
-     <!-- Botón regresar -->
-     <button id="btn-regresar" onclick="regresar()">Regresar</button>
- 
+    <!-- Iframe con formulario -->
+    <iframe id="formulario" src="https://docs.google.com/forms/d/e/1FAIpQLSdjj3B9rsIiZoD3nV6zusYVbA9kjrhxU7JllbORvKNt0PDTUQ/viewform"></iframe>
+    <!-- Botón regresar -->
+    <button id="btn-regresar" onclick="regresar()">Regresar</button>
 
   <script>
     const video = document.getElementById('miVideo');
@@ -256,7 +255,20 @@
       };
     });
 
-  </script>
+    function ajustarZoom() {
+      let ancho = window.innerWidth;
+      let alto = window.innerHeight;
 
+      // Base de referencia (más cómoda para pantallas medianas)
+      let escalaX = ancho / 1280;
+      let escalaY = alto / 900;
+
+      let zoom = Math.min(escalaX, escalaY);
+      document.getElementById("pantalla-principal").style.transform = "scale(" + zoom + ")";
+    }
+
+    window.onload = ajustarZoom;
+    window.onresize = ajustarZoom;
+  </script>
 </body>
 </html>
