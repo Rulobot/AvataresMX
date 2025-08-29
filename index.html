@@ -58,7 +58,7 @@
     }
 
     .button-grid button {
-      width: 100px;
+      width: 150px;
       height: 50px;
       font-size: 16px;
       border: none;
@@ -260,8 +260,8 @@
       let alto = window.innerHeight;
 
       // Base de referencia (más cómoda para pantallas medianas)
-      let escalaX = ancho / 1280;
-      let escalaY = alto / 900;
+      let escalaX = ancho / 1080;
+      let escalaY = alto / 860;
 
       let zoom = Math.min(escalaX, escalaY);
       document.getElementById("pantalla-principal").style.transform = "scale(" + zoom + ")";
