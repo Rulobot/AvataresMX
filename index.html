@@ -260,8 +260,8 @@
       let alto = window.innerHeight;
 
       // Base de referencia (más cómoda para pantallas medianas)
-      let escalaX = ancho / 1080;
-      let escalaY = alto / 860;
+      let escalaX = ancho / 860;
+      let escalaY = alto / 320;
 
       let zoom = Math.min(escalaX, escalaY);
       document.getElementById("pantalla-principal").style.transform = "scale(" + zoom + ")";
